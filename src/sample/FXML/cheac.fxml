@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ADFF2F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.Cheack">
+    <children>
+        <AnchorPane layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
+         <children>
+            <TableView fx:id="table" onMouseClicked="#clicked" prefHeight="400.0" prefWidth="800.0">
+              <columns>
+                <TableColumn fx:id="id_dtp" prefWidth="47.0" text="ID" />
+                <TableColumn fx:id="clas" prefWidth="70.0" text="Класс ДТП" />
+                  <TableColumn fx:id="geo" prefWidth="84.0" text="Геолокация" />
+                  <TableColumn fx:id="colo" prefWidth="82.0" text="Кол-во авто" />
+                  <TableColumn fx:id="radius" prefWidth="92.0" text="Площадь ДТП" />
+                  <TableColumn fx:id="dat" prefWidth="82.0" text="Дата" />
+                  <TableColumn fx:id="slu" prefWidth="88.0" text="Спецслужбы" />
+                  <TableColumn fx:id="tip" prefWidth="84.0" text="Тип дороги" />
+                  <TableColumn fx:id="grys" prefWidth="93.0" text="Опасный груз" />
+                  <TableColumn fx:id="sosto" prefWidth="77.0" text="Состояние" />
+              </columns>
+            </TableView>
+         </children>
+        </AnchorPane>
+        <Text layoutX="219.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Просмотр ДТП">
+            <font>
+                <Font name="Comic Sans MS" size="48.0" />
+            </font>
+        </Text>
+      <Button fx:id="glav" layoutX="30.0" layoutY="47.0" mnemonicParsing="false" text="На главную" />
+      <Button fx:id="vihod" layoutX="708.0" layoutY="35.0" mnemonicParsing="false" text="Выход" />
+    </children>
+</AnchorPane>
