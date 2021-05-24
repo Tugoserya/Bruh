@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ADFF2F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.EditDtp">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ADFF2F;" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.EditDtp">
     <children>
         <AnchorPane layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
             <children>
@@ -23,10 +23,10 @@
                 <TextField fx:id="specsl" layoutX="443.0" layoutY="71.0" />
                 <TextField fx:id="opas" layoutX="145.0" layoutY="123.0" />
                 <TextField fx:id="sosto" layoutX="443.0" layoutY="123.0" />
-            <Button fx:id="awtoDtp" layoutX="468.0" layoutY="349.0" mnemonicParsing="false" text="Участники ДТП" />
+            <Button fx:id="CarDtp" layoutX="468.0" layoutY="349.0" mnemonicParsing="false" text="Участники ДТП" />
             </children>
         </AnchorPane>
-        <Text layoutX="194.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Обновление ДТП">
+        <Text layoutX="194.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Просмотр ДТП">
             <font>
                 <Font name="Comic Sans MS" size="48.0" />
             </font>

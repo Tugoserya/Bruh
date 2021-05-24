@@ -1,10 +1,7 @@
 package sample.animaion;
 
 import javafx.animation.TranslateTransition;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Duration;
 import org.w3c.dom.Node;
 
@@ -18,7 +15,7 @@ public class Snake {
         tt.setCycleCount(3);
         tt.setAutoReverse(true);
     }
-    public Snake(Button node){
+    public Snake(ChoiceBox<String> node){
         tt=new TranslateTransition(Duration.millis(70), (javafx.scene.Node) node);
         tt.setFromX(0f);
         tt.setByX(10f);

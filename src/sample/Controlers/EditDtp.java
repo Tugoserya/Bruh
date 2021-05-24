@@ -3,7 +3,6 @@ package sample.Controlers;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -52,7 +51,7 @@ public class EditDtp {
             awtoDtp.setOnAction(event -> {
                 awtoDtp.getScene().getWindow().hide();
                 FXMLLoader loader=new FXMLLoader();
-                loader.setLocation(getClass().getResource("/sample/FXML/awtoDTP.fxml"));
+                loader.setLocation(getClass().getResource("/sample/FXML/CarDTP.fxml"));
                 try {
                     loader.load();
                 } catch (IOException e) {
@@ -60,6 +59,11 @@ public class EditDtp {
                 }
                 Parent root=loader.getRoot();
                 Stage stage = new Stage();
+                stage.setTitle("Система контроля дорожной обстановки");
+                stage.setMaxHeight(540);
+                stage.setMaxWidth(800);
+                stage.setMinHeight(540);
+                stage.setMinWidth(800);
                 stage.setScene(new Scene(root));
                 stage.show();
             });
@@ -83,7 +87,7 @@ public class EditDtp {
             dayabaswHendel.update(class_dtp.getText(),kolo_dtp.getText(),radius.getText(),specsl.getText(),opas.getText(),sosto.getText());
             update.getScene().getWindow().hide();
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/FXML/cheac.fxml"));
+            loader.setLocation(getClass().getResource("/sample/FXML/view.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
@@ -91,6 +95,11 @@ public class EditDtp {
             }
             Parent root=loader.getRoot();
             Stage stage = new Stage();
+            stage.setTitle("Система контроля дорожной обстановки");
+            stage.setMaxHeight(540);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(540);
+            stage.setMinWidth(800);
             stage.setScene(new Scene(root));
             stage.show();
         });

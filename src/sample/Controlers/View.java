@@ -17,17 +17,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import sample.connection_sql.Const;
 import sample.connection_sql.DayabaswHendel;
+import javafx.scene.image.Image;
 
-public class Cheack {
+public class View {
 
-    @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
 
     @FXML
     private TableView<Table_modul> table;
@@ -36,65 +34,41 @@ public class Cheack {
     private TableColumn<Table_modul, String> id_dtp;
 
     @FXML
-    private TableColumn<Table_modul, String> clas;
+    private TableColumn<Table_modul, String> class_dtp;
 
     @FXML
-    private TableColumn<Table_modul, String> geo;
+    private TableColumn<Table_modul, String> GPS;
 
     @FXML
-    private TableColumn<Table_modul, String> colo;
+    private TableColumn<Table_modul, String> kol_avto;
 
     @FXML
     private TableColumn<Table_modul, String> radius;
 
     @FXML
-    private TableColumn<Table_modul, String> dat;
+    private TableColumn<Table_modul, String> data;
 
     @FXML
-    private TableColumn<Table_modul, String> slu;
+    private TableColumn<Table_modul, String> Inspector_id;
 
     @FXML
-    private TableColumn<Table_modul, String> tip;
-    @FXML
-    private TableColumn<Table_modul, String> grys;
-    @FXML
-    private TableColumn<Table_modul, String> sosto;
-
-    @FXML
-    private Button id;
-
-    @FXML
-    private Button vash;
-
-    @FXML
-    private Button powres;
+    private TableColumn<Table_modul, String> sost;
 
     @FXML
     private Button glav;
 
+
     @FXML
-    private Button vihod;
+    private ImageView prog_image;
 
     ObservableList<Table_modul> observableArray = FXCollections.observableArrayList();
 
     @FXML
     void initialize() {
 
-        vihod.setOnAction(event -> {
-            vihod.getScene().getWindow().hide();
-            FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/FXML/auth_sample.fxml"));
-            try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            Parent root=loader.getRoot();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        });
-        glav.setOnAction(event -> {
+        Image image = new Image("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png");
+        prog_image.setImage(image);
+                glav.setOnAction(event -> {
             glav.getScene().getWindow().hide();
             FXMLLoader loader=new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/FXML/lk_sample.fxml"));
@@ -105,30 +79,39 @@ public class Cheack {
             }
             Parent root=loader.getRoot();
             Stage stage = new Stage();
+            stage.setTitle("Система контроля дорожной обстановки");
+            stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setScene(new Scene(root));
+            stage.setMaxHeight(540);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(540);
+            stage.setMinWidth(800);
             stage.show();
         });
         DayabaswHendel dayabaswHendel = new DayabaswHendel();
         ResultSet resultCheck = dayabaswHendel.DTP_ALL();
         try {
             while (resultCheck.next()) {
-
-                observableArray.add(new Table_modul(resultCheck.getInt("id"), resultCheck.getString("class_dtp"),
-                        resultCheck.getString("mestopolosgenie"), resultCheck.getString("kolo_awto"), resultCheck.getString("radius"),
-                        resultCheck.getString("date_dtp"), resultCheck.getString("spec_sl"),
-                        resultCheck.getString("tip_dor"), resultCheck.getString("opasn_grus"), resultCheck.getString("sosoyaniye")));
+                observableArray.add(new Table_modul(
+                        resultCheck.getInt("id_dtp"),
+                        resultCheck.getString("class_dtp"),
+                        resultCheck.getString("kol_avto"),
+                        resultCheck.getString("data"),
+                        resultCheck.getString("GPS"),
+                        resultCheck.getString("radius"),
+                        resultCheck.getString("sost"),
+                        resultCheck.getString("Inspector_id")
+                ));
 
             }
             id_dtp.setCellValueFactory(new PropertyValueFactory<>("id"));
-            clas.setCellValueFactory(new PropertyValueFactory<>("class_dtp"));
-            geo.setCellValueFactory(new PropertyValueFactory<>("geolocation"));
-            colo.setCellValueFactory(new PropertyValueFactory<>("colo_avto"));
+            class_dtp.setCellValueFactory(new PropertyValueFactory<>("class_dtp"));
+            kol_avto.setCellValueFactory(new PropertyValueFactory<>("kol_avto"));
+            data.setCellValueFactory(new PropertyValueFactory<>("data"));
+            GPS.setCellValueFactory(new PropertyValueFactory<>("GPS"));
             radius.setCellValueFactory(new PropertyValueFactory<>("radius"));
-            dat.setCellValueFactory(new PropertyValueFactory<>("date"));
-            slu.setCellValueFactory(new PropertyValueFactory<>("spec_sl"));
-            tip.setCellValueFactory(new PropertyValueFactory<>("tip_dor"));
-            grys.setCellValueFactory(new PropertyValueFactory<>("grys"));
-            sosto.setCellValueFactory(new PropertyValueFactory<>("sosoyaniye"));
+            sost.setCellValueFactory(new PropertyValueFactory<>("sost"));
+            Inspector_id.setCellValueFactory(new PropertyValueFactory<>("Inspector_id"));
 
             table.setItems(observableArray);
 
@@ -144,7 +127,7 @@ public class Cheack {
             Table_modul table_modul = table.getSelectionModel().getSelectedItem();
             Const.car_dtp_id=table_modul.id;
             FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/FXML/EditDTP.fxml"));
+            loader.setLocation(getClass().getResource("/sample/FXML/CarDTP.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
@@ -152,7 +135,13 @@ public class Cheack {
             }
             Parent root=loader.getRoot();
             Stage stage = new Stage();
+            stage.setTitle("Система контроля дорожной обстановки");
+            stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setScene(new Scene(root));
+            stage.setMaxHeight(540);
+            stage.setMaxWidth(800);
+            stage.setMinHeight(540);
+            stage.setMinWidth(800);
             stage.show();
 
         }

@@ -1,27 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #ADFF2F;" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.LK">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #42aaff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.LK">
     <children>
-        <AnchorPane layoutY="100.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
+        <AnchorPane layoutY="94.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
          <children>
-            <Button fx:id="cheact" layoutX="64.0" layoutY="57.0" mnemonicParsing="false" style="-fx-background-color: 0;" text="Просмотр ДТП">
+            <ImageView fitHeight="106.0" fitWidth="106.0" layoutX="14.0" layoutY="279.0">
+               <image>
+                  <Image url="@../../../../../Downloads/pngegg.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="view" layoutX="274.0" layoutY="102.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="225.0" text="Просмотр ДТП" textOverrun="CLIP">
                <font>
-                  <Font name="Comic Sans MS Italic" size="40.0" />
+                  <Font name="System Italic" size="20.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
-            <Button fx:id="add" layoutX="64.0" layoutY="212.0" mnemonicParsing="false" style="-fx-background-color: 0;" text="Добавление ДТП">
+            <Button fx:id="add" layoutX="274.0" layoutY="229.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="225.0" text="Добавление ДТП" textOverrun="CLIP">
                <font>
-                  <Font name="Comic Sans MS Italic" size="40.0" />
+                  <Font name="System Italic" size="20.0" />
                </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
             </Button>
+            <Text fx:id="data_txt" layoutX="532.0" layoutY="390.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+            <ImageView fx:id="prog_image" fitHeight="106.0" fitWidth="106.0" layoutX="14.0" layoutY="280.0">
+               <image>
+                  <Image url="@../../../resources/pngegg.png" />
+               </image>
+            </ImageView>
          </children>
         </AnchorPane>
-      <Text layoutX="190.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Главная страница">
+      <Text layoutX="174.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Главная страница">
          <font>
             <Font name="Comic Sans MS" size="53.0" />
          </font>

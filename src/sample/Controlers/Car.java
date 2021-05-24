@@ -3,57 +3,40 @@ package sample.Controlers;
 
 public class Car {
 
-    public String gos;
-    public String VIN;
+    public String id_car;
+    public String gos_nomer;
+    public String vin;
     public String marca;
-    public String opas;
-    public String pricep;
+    public String dtp_id;
 
-    public Car(String gos, String VIN, String marca, String opas, String pricep) {
-        this.gos = gos;
-        this.VIN = VIN;
+    public Car(String id_car, String gos_nomer, String vin, String marca, String dtp_id) {
+        this.id_car = id_car;
         this.marca = marca;
-        this.opas = opas;
-        this.pricep = pricep;
+        this.vin = vin;
+        this.gos_nomer = gos_nomer;
+        this.dtp_id = dtp_id;
     }
 
     public String getGos() {
-        return gos;
+        return gos_nomer;
     }
 
     public void setGos(String gos) {
-        this.gos = gos;
+        this.gos_nomer = gos_nomer;
     }
 
     public String getVIN() {
-        return VIN;
+        return vin;
     }
 
     public void setVIN(String VIN) {
-        this.VIN = VIN;
+        this.vin = vin;
     }
 
     public String getMarca() {
         return marca;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+    public void setMarca(String marca) { this.marca = marca; }
 
-    public String getOpas() {
-        return opas;
-    }
-
-    public void setOpas(String opas) {
-        this.opas = opas;
-    }
-
-    public String getPricep() {
-        return pricep;
-    }
-
-    public void setPricep(String pricep) {
-        this.pricep = pricep;
-    }
 }

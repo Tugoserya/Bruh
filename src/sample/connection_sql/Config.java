@@ -5,7 +5,7 @@ public class Config {
     protected String dbPort="3306";
     protected String dbUser="root";
     protected String dbPass="lalala";
-    protected String dbName="bruhh";
+    protected String dbName="Diplom";
 
     public void Config(){
         if(!Const.AUTH){

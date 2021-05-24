@@ -14,18 +14,36 @@ public class DayabaswHendel extends Config {
      */
     public Connection getDbConnection()
             throws ClassNotFoundException, SQLException {
-        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" +" "+ dbName + "?serverTimezone=UTC" + "&characterEncoding=UTF8";
+        String connectionString = "jdbc:mysql://" + dbHost + ":" + dbPort + "/" + " " + dbName + "?serverTimezone=UTC" + "&characterEncoding=UTF8";
         Class.forName("com.mysql.cj.jdbc.Driver");
         dbConnection = DriverManager.getConnection(connectionString, dbUser, dbPass);
         return dbConnection;
     }
 
     /**
-     * Авторизация пользователя
+     * Авторизация инспектора
      */
     public ResultSet getUser(String login_text, String password_text) {
         ResultSet resultSet = null;
-        String select = "SELECT * FROM " + Const.CAR_TABLE + " WHERE " + Const.CAR_LOGIN + "=? AND " + Const.CAR_PASSWORD + "=?";
+        String select = "SELECT * FROM " + Const.INSPECTOR_TABLE + " WHERE " + Const.INSPECTOR_LOGIN + "=? AND " + Const.INSPECTOR_PASSWORD + "=?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, login_text);
+            prSt.setString(2, password_text);
+            resultSet = prSt.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    /**
+     * Авторизация наблюдателя
+     */
+    public ResultSet getViewer(String login_text, String password_text) {
+        ResultSet resultSet = null;
+        String select = "SELECT * FROM " + Const.VIEWER_TABLE + " WHERE " + Const.VIEWER_LOGIN + "=? AND " + Const.VIEWER_PASSWORD + "=?";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
             prSt.setString(1, login_text);
@@ -51,32 +69,40 @@ public class DayabaswHendel extends Config {
     }
 
 
+    public void addDtp(String class_dtp, String GPS, String kol_avto, String radius, String data, String sost) {
 
-    public void addDtp(String class_dtp, String geolocation, String kolo_dtp, String radius, String dataDtp, String specsl, String tip, String opas, String sosto) {
-
-        String insert_add_tested = "INSERT INTO " + Const.DTP_TABLE + "(class_dtp,mestopolosgenie,kolo_awto,radius,date_dtp,spec_sl,tip_dor,opasn_grus,sosoyaniye)" + "VALUES(?,?,?,?,?,?,?,?,?)";
+        String insert_add_tested = "INSERT INTO " + Const.DTP_TABLE + "(class_dtp, kol_avto, data, GPS, radius, sost, Inspector_id)" + "VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert_add_tested);
             prSt.setString(1, class_dtp);
-            prSt.setString(2, geolocation);
-            prSt.setString(3, kolo_dtp);
-            prSt.setString(4, radius);
-            prSt.setString(5, dataDtp);
-            prSt.setString(6, specsl);
-            prSt.setString(7, tip);
-            prSt.setString(8, opas);
-            prSt.setString(9, sosto);
-             prSt.executeUpdate();
-
+            prSt.setString(2, kol_avto);
+            prSt.setString(3, data);
+            prSt.setString(4, GPS);
+            prSt.setString(5, radius);
+            prSt.setString(6, sost);
+            prSt.setString(7, String.valueOf(Const.id_user));
+            prSt.executeUpdate();
 
 
         } catch (SQLException | ClassNotFoundException throwables) {
             throwables.printStackTrace();
         }
     }
-        public ResultSet id_dtp() {
+
+    public ResultSet id_dtp() {
         ResultSet resultSet = null;
-        String select = "SELECT id FROM " + Const.DTP_TABLE;
+        String select = "SELECT id_dtp FROM " + Const.DTP_TABLE;
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            resultSet = prSt.executeQuery();
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
+    public ResultSet id_viewer() {
+        ResultSet resultSet = null;
+        String select = "SELECT id_view FROM " + Const.VIEWER_TABLE;
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
             resultSet = prSt.executeQuery();
@@ -86,16 +112,14 @@ public class DayabaswHendel extends Config {
         return resultSet;
     }
 
-    public void addCarDontDtp(String gosNomer, String vin, String marca, String opasn, String pricep) {
-        String insert_add_tested = "INSERT INTO " + Const.CAR_DTP_TABLE + "(gos_nomer,vin,marca,opasn_grus,pricep,dtp_id)" + "VALUES(?,?,?,?,?,?)";
+    public void addDopCar(String gosNomer, String vin, String marca) {
+        String insert_add_tested = "INSERT INTO " + Const.CAR_DTP_TABLE + "(gos_nomer,vin,marca, dtp_id)" + "VALUES(?,?,?,?)";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(insert_add_tested);
             prSt.setString(1, gosNomer);
             prSt.setString(2, vin);
             prSt.setString(3, marca);
-            prSt.setString(4, opasn);
-            prSt.setString(5, pricep);
-            prSt.setInt(6, Const.dtp);
+            prSt.setInt(4, Const.dtp);
 
             prSt.executeUpdate();
 
@@ -103,7 +127,23 @@ public class DayabaswHendel extends Config {
             throwables.printStackTrace();
         }
     }
+    public void addAcc(String login, String pass, String name, String last_name, String patronymic, String passport) {
+        String insert_add_tested = "INSERT INTO " + Const.VIEWER_TABLE + "(login, pass, name, last_name, patronymic, passport)" + "VALUES(?,?,?,?,?,?)";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(insert_add_tested);
+            prSt.setString(1, login);
+            prSt.setString(2, pass);
+            prSt.setString(3, name);
+            prSt.setString(4, last_name);
+            prSt.setString(5, patronymic);
+            prSt.setString(6, passport);
 
+            prSt.executeUpdate();
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+    }
     public ResultSet CheckUpdatetp() {
         ResultSet resultSet = null;
         String select = "SELECT * FROM " + Const.DTP_TABLE + " WHERE " + Const.CAR_DTP_ID + "=?";
@@ -118,16 +158,16 @@ public class DayabaswHendel extends Config {
         return resultSet;
     }
 
-    public void update(String class_dtpText, String kolo_dtp, String radius, String specsl,String opas, String sosto) {
-        String Update = "update dtp set class_dtp=?, kolo_awto=?, radius=?, spec_sl=?,opasn_grus=?, sosoyaniye=? where "+ Const.DTP_ID + "=?";
+    public void update(String class_dtpText, String kolo_dtp, String radius, String specsl, String opas, String sosto) {
+        String Update = "update dtp set class_dtp=?, kolo_awto=?, radius=?, spec_sl=?,opasn_grus=?, sosoyaniye=? where " + Const.DTP_ID + "=?";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(Update);
-            prSt.setString(1,class_dtpText);
-            prSt.setString(2,kolo_dtp);
-            prSt.setString(3,radius);
-            prSt.setString(4,specsl);
-            prSt.setString(5,opas);
-            prSt.setString(6,sosto);
+            prSt.setString(1, class_dtpText);
+            prSt.setString(2, kolo_dtp);
+            prSt.setString(3, radius);
+            prSt.setString(4, specsl);
+            prSt.setString(5, opas);
+            prSt.setString(6, sosto);
             prSt.setString(7, String.valueOf(Const.car_dtp_id));
             prSt.executeUpdate();
         } catch (Exception e) {
@@ -137,7 +177,7 @@ public class DayabaswHendel extends Config {
 
     public ResultSet Car_dtp() {
         ResultSet resultSet = null;
-        String select = "SELECT * FROM " + Const.CAR_DTP_TABLE + " WHERE " + Const.CAR_DTP_DTP_ID + "=?";
+        String select = "SELECT * FROM " + Const.CAR_DTP_TABLE + " WHERE " + Const.CAR_DTP_CAR_ID + "=?";
         try {
             PreparedStatement prSt = getDbConnection().prepareStatement(select);
             prSt.setString(1, String.valueOf(Const.car_dtp_id));
@@ -148,4 +188,19 @@ public class DayabaswHendel extends Config {
         }
         return resultSet;
     }
+
+    public ResultSet getData() {
+        ResultSet resultSet = null;
+        String select = "SELECT * FROM " + Const.INSPECTOR_TABLE + " WHERE " + Const.INSPECTOR_ID + "=?";
+        try {
+            PreparedStatement prSt = getDbConnection().prepareStatement(select);
+            prSt.setString(1, String.valueOf(Const.id_user));
+            resultSet = prSt.executeQuery();
+
+        } catch (SQLException | ClassNotFoundException throwables) {
+            throwables.printStackTrace();
+        }
+        return resultSet;
+    }
 }
+

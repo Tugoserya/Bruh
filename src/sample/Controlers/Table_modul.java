@@ -3,26 +3,22 @@ package sample.Controlers;
 public class Table_modul {
     public int id;
     public String class_dtp;
-    public String geolocation;
-    public String colo_avto;
+    public String kol_avto;
+    public String data;
+    public String GPS;
     public String radius;
-    public String date;
-    public String spec_sl;
-    public String tip_dor;
-    public String grys;
-    public String sosoyaniye;
+    public String sost;
+    public String Inspector_id;
 
-    public Table_modul(int id, String class_dtp, String geolocation, String colo_avto, String radius, String date, String spec_sl, String tip_dor, String grys, String sosoyaniye) {
+    public Table_modul(int id, String class_dtp, String kol_avto, String data, String GPS,  String radius, String sost, String Inspector_id) {
         this.id = id;
         this.class_dtp = class_dtp;
-        this.geolocation = geolocation;
-        this.colo_avto = colo_avto;
+        this.kol_avto = kol_avto;
+        this.data = data;
+        this.GPS = GPS;
         this.radius = radius;
-        this.date = date;
-        this.spec_sl = spec_sl;
-        this.tip_dor = tip_dor;
-        this.grys = grys;
-        this.sosoyaniye = sosoyaniye;
+        this.sost = sost;
+        this.Inspector_id = Inspector_id;
     }
 
     public int getId() {
@@ -41,20 +37,20 @@ public class Table_modul {
         this.class_dtp = class_dtp;
     }
 
-    public String getGeolocation() {
-        return geolocation;
+    public String getGPS() {
+        return GPS;
     }
 
-    public void setGeolocation(String geolocation) {
-        this.geolocation = geolocation;
+    public void setGPS(String GPS) {
+        this.GPS = GPS;
     }
 
-    public String getColo_avto() {
-        return colo_avto;
+    public String getKol_avto() {
+        return kol_avto;
     }
 
-    public void setColo_avto(String colo_avto) {
-        this.colo_avto = colo_avto;
+    public void setKol_avto(String kol_avto) {
+        this.kol_avto = kol_avto;
     }
 
     public String getRadius() {
@@ -65,43 +61,27 @@ public class Table_modul {
         this.radius = radius;
     }
 
-    public String getDate() {
-        return date;
+    public String getData() {
+        return data;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setData(String data) {
+        this.data = data;
     }
 
-    public String getSpec_sl() {
-        return spec_sl;
+    public String getSost() {
+        return sost;
     }
 
-    public void setSpec_sl(String spec_sl) {
-        this.spec_sl = spec_sl;
+    public void setSost(String sost) {
+        this.sost = sost;
     }
 
-    public String getTip_dor() {
-        return tip_dor;
+    public String getInspector_id() {
+        return Inspector_id;
     }
 
-    public void setTip_dor(String tip_dor) {
-        this.tip_dor = tip_dor;
-    }
-
-    public String getGrys() {
-        return grys;
-    }
-
-    public void setGrys(String grys) {
-        this.grys = grys;
-    }
-
-    public String getSosoyaniye() {
-        return sosoyaniye;
-    }
-
-    public void setSosoyaniye(String sosoyaniye) {
-        this.sosoyaniye = sosoyaniye;
+    public void setInspector_id(String Inspector_id) {
+        this.Inspector_id = Inspector_id;
     }
 }

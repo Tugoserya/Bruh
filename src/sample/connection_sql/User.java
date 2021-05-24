@@ -2,14 +2,14 @@ package sample.connection_sql;
 
 public class User {
     public String login;
-    public String passwor_reg;
+    public String password_reg;
     public String name;
     public String second_name;
     public String date;
 
     public User(String login, String passwor_reg, String name, String second_name, String date) {
         this.login = login;
-        this.passwor_reg = passwor_reg;
+        this.password_reg = passwor_reg;
         this.name = name;
         this.second_name = second_name;
         this.date = date;
@@ -23,12 +23,12 @@ public class User {
         this.login = login;
     }
 
-    public String getPasswor_reg() {
-        return passwor_reg;
+    public String getPassword_reg() {
+        return password_reg;
     }
 
-    public void setPasswor_reg(String passwor_reg) {
-        this.passwor_reg = passwor_reg;
+    public void setPassword_reg(String password_reg) {
+        this.password_reg = password_reg;
     }
 
     public String getName() {
