@@ -3,33 +3,41 @@ package sample.Controlers;
 
 public class Car {
 
-    public String id_car;
+    public int id;
     public String gos_nomer;
     public String vin;
     public String marca;
-    public String dtp_id;
+    public int dtp_col;
 
-    public Car(String id_car, String gos_nomer, String vin, String marca, String dtp_id) {
-        this.id_car = id_car;
-        this.marca = marca;
-        this.vin = vin;
+    public Car(int id, String gos_nomer, String vin, String marca, int dtp_col) {
+        this.id = id;
         this.gos_nomer = gos_nomer;
-        this.dtp_id = dtp_id;
+        this.vin = vin;
+        this.marca = marca;
+        this.dtp_col = dtp_col;
     }
 
-    public String getGos() {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getGos_nomer() {
         return gos_nomer;
     }
 
-    public void setGos(String gos) {
+    public void setGos_nomer(String gos_nomer) {
         this.gos_nomer = gos_nomer;
     }
 
-    public String getVIN() {
+    public String getVin() {
         return vin;
     }
 
-    public void setVIN(String VIN) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
@@ -37,6 +45,15 @@ public class Car {
         return marca;
     }
 
-    public void setMarca(String marca) { this.marca = marca; }
+    public void setMarca(String marca) {
+        this.marca = marca;
+    }
 
+    public int getDtp_col() {
+        return dtp_col;
+    }
+
+    public void setDtp_col(int dtp_col) {
+        this.dtp_col = dtp_col;
+    }
 }

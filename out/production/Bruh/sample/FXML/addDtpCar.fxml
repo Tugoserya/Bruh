@@ -8,11 +8,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #42aaff;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.AddDtpCar">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" style="-fx-background-color: #fafafa;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controlers.AddDtpCar">
     <children>
         <AnchorPane layoutY="93.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #fafafa;">
             <children>
-                <Button fx:id="addCar" layoutX="265.0" layoutY="289.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="272.0" text="Добавить автомобиль">
+                <Button fx:id="addCar" layoutX="266.0" layoutY="289.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="272.0" text="Добавить автомобиль">
                <font>
                   <Font size="20.0" />
                </font></Button>
@@ -31,19 +31,20 @@
                   <Font name="Bodoni MT Black Italic" size="27.0" />
                </font>
             </Text>
-            <TextField fx:id="gosNomer" layoutX="235.0" layoutY="176.0" prefHeight="31.0" prefWidth="331.0" />
+            <TextField fx:id="gosNomer" layoutX="236.0" layoutY="80.0" prefHeight="31.0" prefWidth="331.0" />
             <ImageView fx:id="prog_image" fitHeight="106.0" fitWidth="106.0" layoutX="14.0" layoutY="280.0">
                <image>
                   <Image url="@../../../resources/pngegg.png" />
                </image>
             </ImageView>
-            <TextField fx:id="vin" layoutX="235.0" layoutY="129.0" prefHeight="31.0" prefWidth="331.0" />
-            <TextField fx:id="marca" layoutX="235.0" layoutY="80.0" prefHeight="31.0" prefWidth="331.0" />
+            <TextField fx:id="vin" layoutX="236.0" layoutY="130.0" prefHeight="31.0" prefWidth="331.0" />
+            <TextField fx:id="marca" layoutX="236.0" layoutY="175.0" prefHeight="31.0" prefWidth="331.0" />
+            <Text fx:id="data_txt" layoutX="529.0" layoutY="393.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
             </children>
         </AnchorPane>
-        <Text layoutX="115.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление автомобиля">
+        <Text layoutX="131.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добавление автомобиля">
             <font>
-                <Font name="Comic Sans MS" size="48.0" />
+                <Font name="Gigi" size="48.0" />
             </font>
         </Text>
           <Button fx:id="glav" layoutX="720.0" layoutY="35.0" mnemonicParsing="false" text="Назад" />

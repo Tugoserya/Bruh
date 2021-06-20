@@ -3,7 +3,6 @@ package sample.Controlers;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,20 +15,11 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.FlowPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.animaion.Snake;
 import sample.connection_sql.Const;
 import sample.connection_sql.DayabaswHendel;
-import javafx.application.Application;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.control.Label;
-import javafx.scene.control.ChoiceBox;
-import javafx.collections.ObservableList;
-import javafx.collections.FXCollections;
-import javafx.geometry.Orientation;
 
 public class ADD {
 
@@ -64,27 +54,29 @@ public class ADD {
     @FXML
     private ImageView prog_image;
 
+    @FXML
+    private Text data_txt;
 
     @FXML
     void initialize() {
-        ObservableList<String> options = FXCollections.observableArrayList("1","2","3","4","5");
-
-        class_dtp.setValue("1"); // this statement shows default value
-
-        class_dtp.setItems(options); // this statement adds all values in choiceBox
-        ObservableList<String> optionss = FXCollections.observableArrayList("1","2","3","4","5");
-
-        sost.setValue("1"); // this statement shows default value
-
-        sost.setItems(optionss); // this statement adds all values in choiceBox
-
-
+        ObservableList<String> options = FXCollections.observableArrayList("1", "2", "3");
+        class_dtp.setValue("1");
+        class_dtp.setItems(options);
+        ObservableList<String> optionss = FXCollections.observableArrayList("1", "2", "3", "4", "5");
+        sost.setValue("1");
+        sost.setItems(optionss);
         Image image = new Image("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png");
         prog_image.setImage(image);
+        addDotCar.setVisible(false);
+        data_txt.setText("");
+        try {
+            querry();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         addDotCar.setOnAction(event -> {
 
-            String class_text = class_dtp.getValue();
-            System.out.println(class_text);
+            String class_text = class_dtp.getValue().trim();
             String GPS_text = GPS.getText().trim();
             String kol_avto_text = kol_avto.getText().trim();
             String radius_text = radius.getText().trim();
@@ -98,6 +90,7 @@ public class ADD {
                             if (!date_text.equals("")) {
                                 if (!sost_text.equals("")) {
                                     addDtp(class_text, GPS_text, kol_avto_text, radius_text, date_text, sost_text);
+                                    AddDtpCar.dtp_carr = Integer.parseInt(kol_avto_text);
                                 } else {
                                     Snake snake1 = new Snake(sost);
                                     snake1.playAnim();
@@ -124,7 +117,47 @@ public class ADD {
             }
         });
         addCar.setOnAction(event -> {
-            addDtpCar();
+
+            String class_text = class_dtp.getValue().trim();
+            String GPS_text = GPS.getText().trim();
+            String kol_avto_text = kol_avto.getText().trim();
+            String radius_text = radius.getText().trim();
+            String sost_text = sost.getValue().trim();
+
+            if (!class_text.equals("")) {
+                if (!GPS_text.equals("")) {
+                    if (!kol_avto_text.equals("")) {
+                        if (!radius_text.equals("")) {
+                            if (date.getValue() != null) {
+                                if (!sost_text.equals("")) {
+                                    String date_text = date.getValue().toString().trim();
+                                    addDtp(class_text, GPS_text, kol_avto_text, radius_text, date_text, sost_text);
+                                    AddDtpCar.dtp_carr = Integer.parseInt(kol_avto_text);
+                                    addDtpCar();
+                                } else {
+                                    Snake snake1 = new Snake(sost);
+                                    snake1.playAnim();
+                                }
+                            } else {
+                                Snake snake2 = new Snake(date);
+                                snake2.playAnim();
+                            }
+                        } else {
+                            Snake snake3 = new Snake(radius);
+                            snake3.playAnim();
+                        }
+                    } else {
+                        Snake snake4 = new Snake(kol_avto);
+                        snake4.playAnim();
+                    }
+                } else {
+                    Snake snake5 = new Snake(GPS);
+                    snake5.playAnim();
+                }
+            } else {
+                Snake snake6 = new Snake(class_dtp);
+                snake6.playAnim();
+            }
         });
         glav_2.setOnAction(event -> {
             glav_2.getScene().getWindow().hide();
@@ -140,9 +173,9 @@ public class ADD {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         });
@@ -172,9 +205,9 @@ public class ADD {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (SQLException throwables) {
@@ -184,8 +217,13 @@ public class ADD {
 
     private void addDtp(String class_text, String GPS_text, String kol_avto_text, String radius_text, String date_text, String sost_text) {
         DayabaswHendel dbHandler = new DayabaswHendel();
-        dbHandler.addDtp(class_dtp.getValue(), kol_avto.getText(), date.getValue().toString(), GPS.getText(),
-                radius.getText(), sost.getValue());
+        dbHandler.addDtp(
+                class_text,
+                kol_avto_text,
+                date_text,
+                GPS_text,
+                radius_text,
+                sost_text);
         ResultSet resultPr = dbHandler.id_dtp();
 
         try {
@@ -205,13 +243,28 @@ public class ADD {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    private void querry() throws SQLException {
+        DayabaswHendel dbHandler = new DayabaswHendel();
+        ResultSet resultSet = dbHandler.getData();
+        String name = "";
+        String last_name = "";
+        String id_card = "";
+        while (resultSet.next()) {
+            name = resultSet.getString("name");
+            last_name = resultSet.getString("last_name");
+            id_card = resultSet.getString("id_card");
+
+        }
+        data_txt.setText(last_name + " " + name + " " + id_card);
     }
 }

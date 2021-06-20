@@ -1,12 +1,8 @@
 package sample.Controlers;
 
-import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
-import java.util.ResourceBundle;
-
-import com.mysql.cj.xdevapi.Table;
+import java.sql.SQLException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -19,10 +15,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import sample.connection_sql.Const;
 import sample.connection_sql.DayabaswHendel;
-import javafx.scene.image.Image;
 
 public class View {
 
@@ -57,6 +53,15 @@ public class View {
     @FXML
     private Button glav;
 
+    @FXML
+    private Text name_txt;
+
+    @FXML
+    private Text l_name_txt;
+
+    @FXML
+    private Text id_card_txt;
+
 
     @FXML
     private ImageView prog_image;
@@ -68,26 +73,70 @@ public class View {
 
         Image image = new Image("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png");
         prog_image.setImage(image);
-                glav.setOnAction(event -> {
-            glav.getScene().getWindow().hide();
-            FXMLLoader loader=new FXMLLoader();
-            loader.setLocation(getClass().getResource("/sample/FXML/lk_sample.fxml"));
+        if (Const.status == 2) {
             try {
-                loader.load();
-            } catch (IOException e) {
-                e.printStackTrace();
+                name_txt.setText("");
+                l_name_txt.setText("");
+                id_card_txt.setText("");
+                querry();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
             }
-            Parent root=loader.getRoot();
-            Stage stage = new Stage();
-            stage.setTitle("Система контроля дорожной обстановки");
-            stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
-            stage.setScene(new Scene(root));
-            stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
-            stage.setMinHeight(540);
-            stage.setMinWidth(800);
-            stage.show();
-        });
+        } else {
+            try {
+                name_txt.setText("");
+                l_name_txt.setText("");
+                id_card_txt.setText("");
+                querry_2();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+
+        }
+        if (Const.status == 2) {
+            glav.setOnAction(event -> {
+                glav.getScene().getWindow().hide();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/sample/FXML/lk_sample.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Parent root = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setTitle("Система контроля дорожной обстановки");
+                stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
+                stage.setScene(new Scene(root));
+                stage.setMaxHeight(540);
+                stage.setMaxWidth(840);
+                stage.setMinHeight(540);
+                stage.setMinWidth(840);
+                stage.show();
+            });
+
+        } else {
+            glav.setOnAction(event -> {
+                glav.getScene().getWindow().hide();
+                FXMLLoader loader = new FXMLLoader();
+                loader.setLocation(getClass().getResource("/sample/FXML/auth_sample.fxml"));
+                try {
+                    loader.load();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                Parent root = loader.getRoot();
+                Stage stage = new Stage();
+                stage.setTitle("Система контроля дорожной обстановки");
+                stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
+                stage.setScene(new Scene(root));
+                stage.setMaxHeight(540);
+                stage.setMaxWidth(840);
+                stage.setMinHeight(540);
+                stage.setMinWidth(840);
+                stage.show();
+            });
+        }
         DayabaswHendel dayabaswHendel = new DayabaswHendel();
         ResultSet resultCheck = dayabaswHendel.DTP_ALL();
         try {
@@ -102,7 +151,6 @@ public class View {
                         resultCheck.getString("sost"),
                         resultCheck.getString("Inspector_id")
                 ));
-
             }
             id_dtp.setCellValueFactory(new PropertyValueFactory<>("id"));
             class_dtp.setCellValueFactory(new PropertyValueFactory<>("class_dtp"));
@@ -121,30 +169,64 @@ public class View {
     }
 
 
-    public void clicked(javafx.scene.input.MouseEvent event) {
+    public void clicked(javafx.scene.input.MouseEvent event) throws SQLException {
         if (event.getClickCount() == 2) {
             table.getScene().getWindow().hide();
             Table_modul table_modul = table.getSelectionModel().getSelectedItem();
-            Const.car_dtp_id=table_modul.id;
-            FXMLLoader loader=new FXMLLoader();
+            Const.car_dtp_id = table_modul.id;
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/FXML/CarDTP.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Parent root=loader.getRoot();
+            Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setScene(new Scene(root));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.show();
 
         }
+    }
+
+    private void querry() throws SQLException {
+        DayabaswHendel dbHandler = new DayabaswHendel();
+        ResultSet resultSet = dbHandler.getData();
+        String name = "";
+        String last_name = "";
+        String id_card = "";
+        while (resultSet.next()) {
+            name = resultSet.getString("name");
+            last_name = resultSet.getString("last_name");
+            id_card = resultSet.getString("id_card");
+
+        }
+        name_txt.setText(name);
+        l_name_txt.setText(last_name);
+        id_card_txt.setText(id_card);
+    }
+
+    private void querry_2() throws SQLException {
+        DayabaswHendel dbHandler = new DayabaswHendel();
+        ResultSet resultSet = dbHandler.getData_2();
+        String name = "";
+        String last_name = "";
+        String id_card = "";
+        while (resultSet.next()) {
+            name = resultSet.getString("name");
+            last_name = resultSet.getString("last_name");
+            id_card = resultSet.getString("passport");
+
+        }
+        name_txt.setText(name);
+        l_name_txt.setText(last_name);
+        id_card_txt.setText(id_card);
     }
 }
 

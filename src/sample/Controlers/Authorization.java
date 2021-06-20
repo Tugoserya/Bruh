@@ -1,11 +1,8 @@
 package sample.Controlers;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -42,7 +39,8 @@ public class Authorization {
     void initialize() {
 
         Image image = new Image("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png");
-                prog_image.setImage(image);
+        prog_image.setImage(image);
+
         //Кнопка, перекидывающая на регистрацию
         reg_button.setOnAction(actionEvent -> {
             reg_button.getScene().getWindow().hide();
@@ -59,9 +57,9 @@ public class Authorization {
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setScene(new Scene(root));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.show();
         });
 
@@ -118,9 +116,8 @@ public class Authorization {
 
                             Const.status = 1;
                             if (login_text.equals(log) && pas.equals(password_text)) {
-                                Perehod();
+                                Perehod_2();
                             } else {
-                                System.out.println("Errorsvs");
                                 Snake snake = new Snake(login);
                                 Snake snake2 = new Snake(password_auth);
                                 snake.playAnim();
@@ -131,6 +128,10 @@ public class Authorization {
                         throwables.printStackTrace();
                     }
                 }
+                Snake snake = new Snake(login);
+                Snake snake2 = new Snake(password_auth);
+                snake.playAnim();
+                snake2.playAnim();
             }
 
 
@@ -155,9 +156,30 @@ public class Authorization {
         stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
         stage.setScene(new Scene(root));
         stage.setMaxHeight(540);
-        stage.setMaxWidth(800);
+        stage.setMaxWidth(840);
         stage.setMinHeight(540);
-        stage.setMinWidth(800);
+        stage.setMinWidth(840);
+        stage.show();
+    }
+
+    private void Perehod_2() {
+        auth_button.getScene().getWindow().hide();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/sample/FXML/view.fxml"));
+        try {
+            loader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Parent root = loader.getRoot();
+        Stage stage = new Stage();
+        stage.setTitle("Система контроля дорожной обстановки");
+        stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
+        stage.setScene(new Scene(root));
+        stage.setMaxHeight(540);
+        stage.setMaxWidth(840);
+        stage.setMinHeight(540);
+        stage.setMinWidth(840);
         stage.show();
     }
 }

@@ -1,10 +1,6 @@
 package sample.Controlers;
-
 import java.io.IOException;
-import java.net.URL;
 import java.sql.ResultSet;
-import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import sample.connection_sql.Const;
 import sample.connection_sql.DayabaswHendel;
 
 public class CarDTP {
@@ -58,74 +55,67 @@ public class CarDTP {
         prog_image.setImage(image);
         back.setOnAction(event -> {
             back.getScene().getWindow().hide();
-            FXMLLoader loader=new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/FXML/View.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Parent root=loader.getRoot();
+            Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         });
         glav.setOnAction(event -> {
             glav.getScene().getWindow().hide();
-            FXMLLoader loader=new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/sample/FXML/lk_sample.fxml"));
             try {
                 loader.load();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Parent root=loader.getRoot();
+            Parent root = loader.getRoot();
             Stage stage = new Stage();
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         });
+
         DayabaswHendel dayabaswHendel = new DayabaswHendel();
         ResultSet resultCheck = dayabaswHendel.Car_dtp();
         try {
             while (resultCheck.next()) {
-
-                System.out.println(resultCheck.getString("id_car"));
-                System.out.println(resultCheck.getString("vin"));
-                System.out.println(resultCheck.getString("gos_nomer"));
-                System.out.println(resultCheck.getString("marca"));
-                System.out.println(resultCheck.getString("dtp_id"));
+                Const.vin = resultCheck.getInt("vin");
                 observableArray.add(new Car(
-                        resultCheck.getString("id_car"),
-                        resultCheck.getString("vin"),
+                        resultCheck.getInt("id_car"),
                         resultCheck.getString("gos_nomer"),
+                        resultCheck.getString("vin"),
                         resultCheck.getString("marca"),
-                        resultCheck.getString("dtp_id")));
-
+                        resultCheck.getInt("dtp_col")
+                ));
             }
-            id_car.setCellValueFactory(new PropertyValueFactory<>("dtp_id"));
-
+            id_car.setCellValueFactory(new PropertyValueFactory<>("id"));
             gos_nomer.setCellValueFactory(new PropertyValueFactory<>("gos_nomer"));
             vin.setCellValueFactory(new PropertyValueFactory<>("vin"));
             marca.setCellValueFactory(new PropertyValueFactory<>("marca"));
-            dtp_col.setCellValueFactory(new PropertyValueFactory<>("dtp_id"));
-
+            dtp_col.setCellValueFactory(new PropertyValueFactory<>("dtp_col"));
             table.setItems(observableArray);
 
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    }
-
+}

@@ -4,7 +4,6 @@ import javafx.fxml.FXML;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,7 +14,6 @@ import javafx.stage.Stage;
 import sample.connection_sql.Const;
 import sample.connection_sql.DayabaswHendel;
 import javafx.scene.text.Text;
-import javafx.scene.image.Image;
 
 public class LK {
 
@@ -62,9 +60,9 @@ public class LK {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
 
@@ -83,9 +81,9 @@ public class LK {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         });
@@ -104,9 +102,9 @@ public class LK {
             stage.setTitle("Система контроля дорожной обстановки");
             stage.getIcons().add(new Image(("file:\\" + "C:\\Users\\Egor Cvetkov\\IdeaProjects\\Bruh\\resources\\pngegg.png")));
             stage.setMaxHeight(540);
-            stage.setMaxWidth(800);
+            stage.setMaxWidth(840);
             stage.setMinHeight(540);
-            stage.setMinWidth(800);
+            stage.setMinWidth(840);
             stage.setScene(new Scene(root));
             stage.show();
         });
